@@ -291,7 +291,17 @@ def extract_pins_from_tables(pdf_path: str, verbose: bool = False) -> Optional[D
                         # Clean and validate pin number and name
                         if not re.match(r"^\d+$", pin_num):
                             continue
+                        
+                        # Skip pin 0 (invalid)
+                        pin_num_int = int(pin_num)
+                        if pin_num_int == 0:
+                            continue
+                        
                         if len(name) < config.MIN_PIN_NAME_LENGTH or len(name) > config.MAX_PIN_NAME_LENGTH:
+                            continue
+                        
+                        # Skip if name is just a single digit (e.g., "0")
+                        if name.isdigit() and len(name) <= 2:
                             continue
                         
                         # Skip if name looks like a device/part number (e.g., ADS1115)
@@ -407,12 +417,40 @@ def extract_pins_from_tables(pdf_path: str, verbose: bool = False) -> Optional[D
                         name = match.group(2).strip()
                         desc = match.group(3).strip()
                         
+                        # Skip pin 0 (likely not a real pin)
+                        if pin_num == 0:
+                            continue
+                        
+                        # Skip if pin number is too high (likely not a pin table)
+                        if pin_num > 256:  # Reasonable max for IC pins
+                            continue
+                        
                         # Skip if we already have this pin from table
                         if any(p[0] == pin_num for p in candidates):
                             continue
                         
+                        # Validate it looks like a pin name (common pin name patterns)
+                        # Must start with letter and not look like register/parameter names
+                        if not re.match(r'^[A-Z]', name):
+                            continue
+                        
+                        # Skip common false positives (register names, parameters, etc.)
+                        false_positive_patterns = [
+                            r'^DR$',  # Data Rate (not a pin)
+                            r'^\d+$',  # Just numbers
+                            r'^[A-Z]S$',  # XS pattern (might be other things)
+                            r'^T[A-Z]$',  # TX pattern followed by single letter
+                        ]
+                        if any(re.match(pattern, name) for pattern in false_positive_patterns):
+                            continue
+                        
                         # Validate it looks like a pin (not random text)
                         if len(name) >= config.MIN_PIN_NAME_LENGTH and len(name) <= config.MAX_PIN_NAME_LENGTH:
+                            # Additional validation: description should look reasonable
+                            # (not just a number or formula)
+                            if re.match(r'^[=<>]|^\d+$', desc):  # Starts with operator or just numbers
+                                continue
+                            
                             details = {"description": desc} if desc else None
                             pin_obj = Pin(
                                 number=pin_num,
