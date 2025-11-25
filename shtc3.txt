@@ -1,0 +1,755 @@
+
+
+================================================================================
+PAGE 1
+================================================================================
+
+Datasheet SHTC3
+Humidity and Temperature Sensor IC
+▪ Ultra-low power consumption
+▪ Full battery supply voltage range (1.62 - 3.6 V)
+▪ Small DFN package: 2 × 2 × 0.75 mm3
+▪ Typical accuracy: ±2 %RH and ±0.2 °C
+▪ Fully calibrated and reflow solderable
+▪ Power-up and measurement within 1 ms
+▪ NIST traceability
+Product Summary
+The SHTC3 is a digital humidity and temperature sensor The sensor covers a humidity measurement range of 0 to
+designed especially for battery-driven high-volume 100 %RH and a temperature measurement range of
+consumer electronics applications. This sensor is strictly - 40 °C to 125 °C with a typical accuracy of ±2 %RH and
+designed to overcome conventional limits for size, power ±0.2°C. The broad supply voltage of 1.62 V to 3.6 V and
+consumption, and performance to price ratio in order to an energy budget below 1 µJ per measurement make the
+fulfill current and future requirements. Sensirion’s SHTC3 suitable for mobile or wireless applications
+CMOSens® technology offers a complete sensor system powered by batteries. With the industry-proven quality and
+on a single chip, consisting of a capacitive humidity sensor, reliability of Sensirion’s humidity and temperature sensors
+a bandgap temperature sensor, analog and digital signal and constant accuracy over a large measurement range,
+processing, A/D converter, calibration data memory, and a the SHTC3 offers best performance-to-price ratio. Tape
+digital communication interface supporting I2C Fast Mode and reel packaging together with suitability for standard
+Plus. The small 2 × 2 × 0.75 mm3 DFN package enables SMD assembly processes make the SHTC3 predestined
+applications in even the most limited of spaces. for high-volume applications.
+Benefits of Sensirion’s CMOSens® Technology
+▪ High reliability and long-term stability Block diagram
+▪ Industry-proven technology with a track record of
+more than 15 years
+RH sensor T sensor
+▪ Designed for mass production
+▪ Optimized for lowest cost
+Signal conditioning Signal conditioning
+▪ High signal-to-noise ratio
+Contents of this Data Sheet
+1 Humidity and Temperature Sensor ADC analog
+digital
+Specifications ............................................................ 2
+2 Electrical Specifications ..................................... 3
+Data processing and system control
+3 Timing Specifications......................................... 4
+4 Interface Specifications ..................................... 6
+Calibration mem. I2C interface
+5 Operation and Communication .......................... 6
+6 Quality ............................................................... 9 VDD VSS SDA SCL
+7 Packaging and Traceability ............................... 9
+8 Ordering Information.......................................... 9
+Figure 1 Functional block diagram of the SHTC3.
+9 Technical Drawings ......................................... 10
+10 Further Information .......................................... 12
+www.sensirion.com Version 4 – December 2022 1/14
+
+================================================================================
+PAGE 2
+================================================================================
+
+Figure 2 Typical and maximal tolerance for relative humidity in %RH
+at 25 °C.
+1 Humidity and Temperature Sensor
+Temperature
+Specifications
+Parameter Condition Value Unit
+Every SHTC3 is individually tested and calibrated and is
+Typ. 0.2 °C
+identifiable by its unique serial number. The serial number is Accuracy tolerance1
+Max. see Figure 3 °C
+stored in an unchangeable OTP memory.
+For the calibration, Sensirion uses transfer standards, which Repeatability2 - 0.1 °C
+are subject to a scheduled calibration procedure. The Resolution3 - 0.01 °C
+calibration of the reference, used for the calibration of the
+Specified range4 - –40 to +125 °C
+transfer standards, is NIST traceable through an ISO/IEC
+Response time8  63% <5 to 30 s
+17025 accredited laboratory.
+Long-term drift 9 Typ. <0.02 °C/y
+Table 2 Temperature sensor specifications.
+Relative Humidity
+Parameter Condition Value Unit
+Typ. 2.0 %RH
+Accuracy tolerance1 ΔT [C]
+Max. see Figure 2 %RH
+±1.6
+Repeatability2 - 0.1 %RH Maximum Accuracy
+Resolution3 - 0.01 %RH Typical Accuracy
+±1.2
+Hysteresis - 1 %RH
+Specified range4 extended5 0 to 100 %RH
+±0.8
+Response time6  63% 8 s
+Long-term drift7 Typ. <0.25 %RH/y ±0.4
+Table 1 Humidity sensor specifications.
+±0
+-40 -20 0 20 40 60 80 100 120
+ΔRH [%RH]
+Temperature [°C]
+Figure 3 Typical and maximal tolerance for temperature sensor
+±6 Maximum accuracy in °C.
+Typical Accuracy
+±4
+±2
+±0
+0 10 20 30 40 50 60 70 80 90 100
+Relative humidity [%RH]
+1 For definition of typ. and max. accuracy tolerance, please refer to the document 6 Time for achieving 63% of a humidity step function, valid at 25°C and 1 m/s
+“Sensirion Humidity Sensor Specification Statement”. Specification applies to airflow. Humidity response time in the application depends on the design-in of
+normal mode. the sensor.
+2 The stated repeatability is 3 times the standard deviation (3σ) of multiple 7 Typical value for operation in normal RH/T operating range. Max. value is <
+consecutive measurement values at constant conditions and is a measure for the 0.5 %RH/y. Value may be higher in environments with vaporized solvents, out-
+noise on the physical sensor output. Specification applies to normal mode. gassing tapes, adhesives, packaging materials, etc. For more details please
+3 Resolution of A/D converter. Specification applies to normal mode. refer to Handling Instructions.
+4 Specified range refers to the range for which the humidity or temperature sensor 8 Temperature response time depends on heat conductivity of sensor
+specification is guaranteed. substrate and design-in of sensor in application.
+5 For details about recommended humidity and temperature operating range, please 9 Max. value is < 0.04°C/y.
+refer to section 1.2.
+www.sensirion.com Version 4 – December 2022 2/14
+
+================================================================================
+PAGE 3
+================================================================================
+
+1.1 RH Accuracy at Various Temperatures Figure 4 Typical accuracy of relative humidity measurements given
+in %RH for temperatures 0°C … 80°C.
+Typical RH accuracy at 25°C is defined in Figure 2. For
+other temperatures, typical accuracy has been evaluated to
+1.2 Recommended Operating Conditions
+be as displayed in Figure 4.
+The sensor performs best when operated within the
+100 ±3.5 ±3 ±3 ±3 ±3 ±3 ±3.5 ±4 ±4 recommended normal temperature and humidity range of 5 –
+90 ±3.5 ±3 ±2.5 ±2.5 ±2.5 ±2.5 ±3 ±3.5 ±4 60 °C and 20 – 80 %RH, respectively. Long-term exposure to
+]H
+80 ±3 ±2.5 ±2 ±2 ±2 ±2.5 ±2.5 ±3 ±3.5 conditions outside the normal range, especially at high
+R
+% 70 ±3 ±2.5 ±2 ±2 ±2 ±2 ±2.5 ±2.5 ±3 humidity, may temporarily offset the RH signal (e.g. +3%RH
+[
+y
+tid 60 ±2.5 ±2 ±2 ±2 ±2 ±2 ±2 ±2.5 ±2.5 after 60h at >80%RH). After returning to normal temperature
+im 50 ±2.5 ±2 ±2 ±2 ±2 ±2 ±2 ±2 ±2.5 and humidity range the sensor will slowly come back to its
+u
+H 40 ±2.5 ±2 ±2 ±2 ±2 ±2 ±2 ±2 ±2 calibration state by itself. Prolonged exposure to extreme
+e v ita 30 ±2.5 ±2 ±2 ±2 ±2 ±2 ±2 ±2 ±2 conditions may accelerate ageing.
+le 20 ±2.5 ±2.5 ±2 ±2 ±2 ±2 ±2 ±2 ±2 To ensure stable operation of the humidity sensor, please
+R
+10 ±3 ±3 ±2.5 ±2.5 ±2.5 ±2.5 ±2.5 ±2.5 ±2.5 refer to the Handling Instructions SHT. Please note as well
+0 ±3.5 ±3.5 ±3 ±3 ±3 ±3 ±3 ±3 ±3 that this does apply not only to transportation and
+manufacturing, but also to operation of the SHTC3.
+0 10 20 30 40 50 60 70 80
+Temperature [°C]
+2 Electrical Specifications
+2.1 Electrical Characteristics
+Default conditions of 25 °C and 3.3 V supply voltage apply to values in the table below, unless otherwise stated.
+Parameter Symbol Conditions Min Typ. Max Units Comments
+Supply voltage V 1.62 3.3 3.6 V -
+DD
+Power-up/down level V Static power supply 1.28 1.4 1.55 V -
+POR
+After power-up the sensor
+remains in the idle state unless
+Idle state - 45 70 µA
+a sleep command is issued or
+other data transmission is active
+When in sleep mode, the sensor
+requires a dedicated wake-up
+Sleep Mode - 0.3 0.6 µA
+command to enable further I2C
+communication
+Supply current I
+DD Normal Mode - 430 900 µA Average current consumption
+Measurement
+Low Power M. - 270 570 µA while the sensor is measuring
+Average current consumption
+Normal Mode - 4.9 - µA (continuous operation with one
+measurement per second)
+Average Average current consumption
+Low Power M. - 0.5 - µA (continuous operation with one
+measurement per second)
+Low level input voltage V - - - 0.42 V V -
+IL DD
+High level input voltage V - 0.7 V - - V -
+IH DD
+Low level output voltage V 3 mA sink current - - 0.2 V V -
+OL DD
+Table 3 Electrical specifications.
+www.sensirion.com Version 4 – December 2022 3/14
+
+================================================================================
+PAGE 4
+================================================================================
+
+2.2 Absolute Maximum Ratings
+Stress levels beyond the limits listed in Table 4 may cause permanent damage to the device. These are stress ratings only and
+functional operation of the device at these conditions cannot be guaranteed. Exposure to the absolute maximum rating conditions
+for extended periods may affect the reliability of the device. Parameters are only tested each at a time.
+Parameter Rating
+Supply voltage, V -0.3 to +4 V
+DD
+Operating temperature range -40 to +125 °C
+Storage temperature range10 -40 to +125 °C
+ESD HBM (human body model)11 -2 to 2 kV
+ESD CDM (change device model)12 -500 to 500 V
+Latch up, JESD78 Class II, 125°C -100 to 100 mA
+Table 4 Absolute maximum ratings.
+3 Timing Specifications
+3.1 Sensor System Timings
+Default conditions of 25 °C and 3.3 V supply voltage apply to values the table below, unless otherwise stated. Max. values are
+measured at -40 °C.
+Parameter Symbol Conditions Min. Typ. Max. Units Comments
+Time between V reaching V
+DD PU
+Power-up time t After hard reset, V ≥ V - 180 240 µs and sensor entering the idle
+PU DD POR
+state
+Time between ACK of soft reset
+Soft reset time t After soft reset. - 180 240 µs command and sensor entering
+SR
+the idle state
+Normal Mode - 10.8 12.1 Duration for a humidity and
+Measurement duration t Average ms
+MEAS Low Power M. - 0.7 0.8 temperature measurement
+Table 5 System timing specifications.
+10 The recommended storage temperature range is 10-50°C. Please consult the document “SHTxx Handling Instructions” for more information.
+11 According to ANSI/ESDA/JEDEC JS-001-2014; AEC-Q100-002.
+12 According to ANSI/ESD S5.3.1-2009; AEC-Q100-011.
+www.sensirion.com Version 4 – December 2022 4/14
+
+================================================================================
+PAGE 5
+================================================================================
+
+3.2 Communication Timings
+Default conditions of 25 °C and 3.3 V supply voltage apply to values in the table below, unless otherwise stated.
+Parameter Symbol Conditions Standard-mode Fast-mode Fast-mode Plus Units
+Min. Max. Min. Max. Min. Max.
+SCL clock frequency f - 0 100 0 400 0 1000 kHz
+SCL
+Hold time (repeated) START t After this period, the 4.0 - 0.6 - 0.26 - µs
+HD;STA
+condition first
+clock pulse is
+generated
+LOW period of the SCL clock t - 4.7 - 1.3 - 0.5 - µs
+LOW
+HIGH period of the SCL clock t - 4.0 - 0.6 - 0.26 - µs
+HIGH
+Set-up time for a repeated t - 4.7 - 0.6 - 0.26 - µs
+SU;STA
+START condition
+SDA hold time t - 0 - 0 - 0 - µs
+HD;DAT
+SDA set-up time t - 250 - 100 - 50 - ns
+SU;DAT
+SCL/SDA rise time t - - 1000 20 300 - 120 ns
+R
+SCL/SDA fall time t - - 300 20 x (V 300 20 x (V 120 ns
+F DD DD
+/ 5.5V) / 5.5V
+SDA valid time t - - 3.45 - 0.9 - 0.45 µs
+VD;DAT
+Set-up time for STOP condition t - 4.0 - 0.6 - 0.26 - µs
+SU;STO
+Capacitive load on bus line C - - 400 - 400 - 550 pF
+B
+Table 6 Communication timing specifications. The numbers above are values according to the I2C specification.
+1/fSCL
+tHIGH tLOW tR tF
+70%
+SCL
+30%
+tSU;DAT tHD;DAT
+DATA IN
+70%
+SDA
+30%
+tR
+tVD;DAT tF
+DATA OUT
+70%
+SDA
+30%
+Figure 5 Timing diagram for digital input/output pads. SDA directions as seen from the sensor. Bold SDA lines are controlled by the sensor,
+plain SDA lines are controlled by the micro-controller. Note that SDA valid read time is triggered by falling edge of preceding toggle.
+www.sensirion.com Version 4 – December 2022 5/14
+
+================================================================================
+PAGE 6
+================================================================================
+
+4 Interface Specifications the temperature sensor. For more information on design-in,
+please refer to the document “SHTxx Design Guide”.
+The SHTC3 supports I2C Normal, Fast Mode and Fast
+Mode Plus (SCL clock frequency from 0 to 1 MHz) with For mechanical reasons the center pad should be soldered.
+clock stretching. Please choose the protocol most suited to Electrically, the center pad is internally connected to GND
+your application and refer to its specific specifications. For and may be connected to the GND net on the PCB
+detailed information on the I2C protocol, refer to NXP I2C- additionally.
+bus specification and user manual UM10204, Rev. 6, April
+4th, 2014. 5 Operation and Communication
+The SHTC3 comes in a 4-pin package – see Table 7.
+All commands and memory locations of the SHTC3 are
+mapped to a 16-bit address space which can be accessed
+Pin Name Comments
+via the I2C protocol.
+1 VDD Supply voltage
+SHT C3
+2 SCL Serial clock, bidirectional 1 4 5.1 I2C Address
+3 SDA Serial data, bidirectional The I2C device address is given Table 8:
+2 3
+AXY89
+4 VSS Ground
+SHTC3 Hex. Code Bin. Code
+Table 7 SHTC3 pin assignment (top view). The center pad is I2C address 0x70 111’0000
+internally connected to VSS.
+Table 8 SHTC3 I2C device address.
+Power-supply pins supply voltage (VDD) and ground (VSS)
+must be decoupled with a 100 nF capacitor that shall be Each transmission sequence begins with START condition
+placed as close to the sensor as possible – see Figure 6. (S) and ends with an (optional) STOP condition (P) as
+described in the I2C-bus specification.
+SCL is used to synchronize the communication between the
+microcontroller and the sensor. The master must keep the 5.2 Power-Up, Sleep, Wakeup
+clock frequency within 0 to 1 MHz as specified in Table 6. Upon VDD reaching the power-up voltage level V , the
+POR
+The SHTC3 may pull down the SCL line when clock SHTC3 enters the idle state after a duration of t . After that,
+PU
+stretching is enabled. the sensor should be set to sleep mode with the command
+given in Table 913.
+The SDA pin is used to transfer data in and out of the
+sensor. For safe communication, the timing specifications
+Command Hex. Code Bin. Code
+defined in the I2C manual must be met.
+Sleep 0xB098 1011’0000’1001’1000
+To avoid signal contention, the microcontroller must only
+Table 9 Sleep command of the sensor.
+drive SDA and SCL low. External pull-up resistors (e.g.
+10 kΩ) are required to pull the signal high. For
+When the sensor is in sleep mode, it requires the following
+dimensioning resistor sizes please take the bus capacity
+wake-up command before any further communication, see
+requirements into account. Note that pull-up resistors may
+Table 10:
+be included in I/O circuits of microcontrollers.
+Command Hex. Code Bin. Code
+VDD Wakeup 0x3517 0011’0101’0001’0111
+SHTC3
+MCU (master) RP RP (slave) Table 10 Wake-up command of the sensor.
+SCL IN SCL
+C
+S S C D L A O IN U T SDA 8 Y X A 3 C T H S 0 0 1 =
+n
+5
+T
+.
+h
+3
+e S
+M
+HT
+e
+C
+as
+3
+u
+p
+re
+ro
+m
+vi
+e
+d
+n
+es
+t C
+a
+o
+c
+m
+lo
+m
+ck
+a
+-
+n
+st
+d
+re
+s
+t ching option and the
+SDA OUT F
+order of the signal return can be selected. These
+GND
+parameters are selected by dedicated measurement
+Figure 6 Typical application circuit, including pull-up resistors R commands as summarized in Table 11. N. B.: Each
+P
+and decoupling of VDD and VSS by a capacitor. measurement command triggers always both, a
+temperature and a relative humidity measurement.
+For good performance of the SHTC3 in the application, the
+center pad of the SHTC3 offers the best thermal contact to
+13 If an immediate sensor signal is desired, sending the sensor to sleep mode
+can be omitted. Not sending the sensor to sleep mode for an extended amount
+of time keeps up the current consumption of the sensor.
+www.sensirion.com Version 4 – December 2022 6/14
+
+================================================================================
+PAGE 7
+================================================================================
+
+Clock Stretching Clock Stretching 5.4 Measuring and Reading the Signals
+Enabled Disabled
+Each measurement cycle contains a set of four commands,
+Read T Read RH Read T Read RH
+each initiated by the I2C START condition and ended by the
+First First First First
+I2C STOP condition:
+Normal Mode 0x7CA2 0x5C24 0x7866 0x58E0
+1. Wakeup command
+Low Power
+0x6458 0x44DE 0x609C 0x401A
+M. 2. Measurement command
+Table 11 Measurement commands. 3. Read out command
+4. Sleep command
+An exemplary measurement set is shown in Figure 7
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+S 1 1 1 0 0 0 0 0
+K
+C 0 0 1 1 0 1 0 1
+K
+C 0 0 0 1 0 1 1 1
+K
+C P SHTC3 wake up
+A A A
+I2C address + write Wakeup command MSB Wakeup command LSB Wakeup time see Table 5
+28 29 30 31 32 33 34 35 36 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55
+S 1 1 1 0 0 0 0 0 K C 0 1 0 1 1 1 0 0 K C 0 0 1 0 0 1 0 0 K C P SHTC3 measuring
+A A A
+I2C address + write Measurement command MSB Measurement command LSB Measurement in progress
+56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73
+clock stretching
+disabled S 1 1 1 0 0 0 0 1 K C A N P SHTC3 measuring SHTC st 3 a t i e n idle S 1 1 1 0 0 0 0 1 K C A
+repeated I2C address + read measurement
+measurement cont’d I2C address + read
+while meas. is in prog. (polling) completed
+56 57 58 59 60 61 62 63 64
+clock S 1 1 1 0 0 0 0 1
+K
+C
+SHTC3 measuring,
+A SCL line pulled low
+stretching en abled
+I2C address + read
+measurement continued
+while meas. is in progress
+74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
+K K K
+1 0 1 0 0 0 0 1 C 0 0 1 1 0 0 1 1 C 0 0 0 1 1 1 0 0 C
+A A A
+Humidity MSB Humidity LSB Humidity CRC checksum
+101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127
+0 1 1 0 0 1 0 0 K C 1 0 0 0 1 0 1 1 K C 1 1 0 0 0 1 1 1 K C P
+A A A
+Temperature MSB Temperature LSB Temperature CRC checksum
+128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154
+S 1 1 1 0 0 0 0 0
+K
+C 1 0 1 1 0 0 0 0
+K
+C 1 0 0 1 1 0 0 0
+K
+C P
+A A A
+I2C address + write Sleep command MSB Sleep command LSB
+Figure 7 Communication sequence for waking up the sensor, starting a measurement and reading measurement results displaying both
+clock stretching options.
+The numerical example corresponds to a read humidity-first command with clock stretching enabled. The physical values of the transmitted
+measurement results are 63 %RH and 23.7 °C. Clear blocks are controlled by the microcontroller, grey blocks by the SHTC3.
+www.sensirion.com Version 4 – December 2022 7/14
+
+================================================================================
+PAGE 8
+================================================================================
+
+5.5 Sensor Behavior during Measurement and sensor to reset all internal state machines and reload
+Clock Stretching calibration data from the memory.
+In general, the sensor does not respond to any I2C activity Command Hex. Code Bin. Code
+during measurement, i.e. I2C read and write headers are not
+Software reset 0x805D 1000’0000’0101’1101
+acknowledged (NACK). However, when clock stretching
+has been enabled by using a corresponding measurement Table 12 Soft reset command.
+command, the sensor responds to a read header with an
+ACK and subsequently pulls down the SCL line until the 5.8 Reset through General Call
+measurement is complete. As soon as the measurement is Additionally, a reset of the sensor can also be generated
+complete, the sensor starts sending the measurement using the “general call” mode according to I2C-bus
+results. specification14. This generates a reset which is functionally
+During measurement, the sensor has a current identical to using the nReset pin. It is important to
+consumption according to Table 3. understand that a reset generated in this way is not device
+For best possible repeatability of humidity and temperature specific. All devices on the same I2C bus that support the
+measurements, it is recommended to avoid any general call mode will perform a reset. Additionally, this
+communication on the I2C bus while the SHTC3 is command only works when the sensor is able to process
+measuring. For more information, see the application note I2C commands. The appropriate command consists of two
+“Optimization of Repeatibility”. bytes and is shown in Table 13.
+5.6 Readout of Measurement Results Command Code
+After a measurement command has been issued and the Address byte 0x00
+Second byte 0x06
+sensor has completed the measurement, the master can
+Reset command using the
+read the measurement results by sending a START 0x0006
+general call address
+condition followed by an I2C read header. The sensor will
+1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9
+acknowledge the reception of the read header and send two S General Call Address K C Reset Command K C
+bytes of data followed by one byte CRC checksum and A A
+General Call 1st byte General Call 2nd byte
+another two bytes of data followed by one byte CRC
+checksum. Each byte must be acknowledged by the
+Table 13 Reset through the general call address (clear blocks are
+microcontroller with an ACK condition for the sensor to
+controlled by the microcontroller, grey blocks by the sensor)
+continue sending data. If the SHTC3 does not receive an
+ACK from the master after any byte of data, it will not
+5.9 Read-out of ID Register
+continue sending data.
+The SHTC3 has an ID register which contains an SHTC3-
+The I2C master can abort the read transfer with a NACK specific product code. The read-out of the ID register can
+condition after any data byte if it is not interested in be used to verify the presence of the sensor and proper
+subsequent data, e.g. the CRC byte or the second communication. The command to read the ID register is
+measurement result, in order to save time. shown in Table 14.
+In case the user needs humidity and temperature data but Command Hex. Code Bin. Code
+does not want to process CRC data, it is recommended to
+Read ID register 0xEFC8 1110’1111’1100’1000
+read the first two bytes of data with the CRC byte (without
+processing the CRC data) and abort the read transfer after Table 14 Read-out command of ID register.
+reading the second two data bytes with a NACK. This
+procedure is more time efficient than starting two different It needs to be sent to the SHTC3 after an I2C write header.
+measurements and aborting the read transfer after the first Once the SHTC3 has acknowledged the proper reception
+two data bytes each time. of the command, the master can send an I2C read header
+and the SHTC3 submits the 16-bit ID followed by 8 bits of
+5.7 Soft Reset
+CRC. The structure of the ID is described in Table 15.
+The SHTC3 provides a soft reset mechanism that forces
+the system into a well-defined state without removing the
+power supply. If the system is in its idle state (i.e. if no
+measurement is in progress) the soft reset command can
+be sent to SHTC3 according to Table 12. This triggers the
+14 http://www.nxp.com/documents/user_manual/UM10204.pdf
+www.sensirion.com Version 4 – December 2022 8/14
+
+================================================================================
+PAGE 9
+================================================================================
+
+16-bit ID 6.2 Material Contents
+bits 15 to 12 & 10 to 6: unspecified info. The device is fully RoHS, REACH and Halogen-Free
+compliant, e.g. free of Pb, Cd, and Hg.
+xxxx' 1 xxx’xx 00’0111
+7 Packaging and Traceability
+bits 11 & 5 to 0: SHTC3 identifier.
+SHTC3 sensors are provided in a DFN package with an
+outline of 2 × 2 × 0.75 mm3 and a terminal pitch of 1 mm.
+Table 15 Structure of the 16-bit ID. Bits 15:12 & 10:6 of the ID
+DFN stands for dual flat no leads. The humidity sensor
+contain unspecified information (marked as “x”), which may vary
+opening is centered on the top side of the package.
+from sensor to sensor, while bits 11 & 5:0 contain the SHTC3-
+specific product code. The sensor chip is made of silicon and is mounted to a lead
+frame. The latter is made of Cu plated with Ni/Pd/Au. Chip
+5.10 Checksum Calculation and lead frame are overmolded by an epoxy-based mold
+The 8-bit CRC checksum transmitted after each data word compound. Please note that the sidewalls of sensor are
+is generated by a CRC algorithm with the properties diced and therefore these diced lead frame surfaces are not
+displayed in Table 16. The CRC covers the contents of the covered with the respective plating.
+two previously transmitted data bytes.
+The Moisture Sensitivity Level classification of the SHTC3
+is MSL1, according to IPC/JEDEC J-STD-020.
+Property Value
+Name CRC-8 All SHTC3 sensors are laser marked for easy identification
+and traceability. The marking on the sensor consists of two
+Width 8 bits
+lines and a pin-1 indicator. The top line contains the sensor
+Polynomial 0x31 (x8 + x5 + x4 + 1)
+type (SHTC3), the bottom line contains a 5-digit,
+Initialization 0xFF
+alphanumeric tracking code. The pin-1 indicator is located
+Reflect input False in the top left corner. See Figure 8 for illustration.
+Reflect output False
+Final XOR 0x00
+Examples CRC (0x00) = 0xAC SHTC3
+CRC (0xBEEF) = 0x92
+Table 16 SHTC3 I2C CRC properties.
+XXXXX
+5.11 Conversion of Sensor Output
+Measurement data is always transferred as 16-bit values.
+Figure 8 Laser marking on SHTC3, the top line with the pin-1
+These values are already linearized and temperature indicator and the sensor type, the bottom line with the 5-digit
+compensated by the SHTC3. Humidity and temperature alphanumeric tracking code.
+values can be calculated with the formulas in given below.
+Reels are also labeled and provide additional traceability
+Relative humidity conversion formula (result in %RH): information.
+S
+RH =100  RH
+216 8 Ordering Information
+The SHTC3 can be ordered in tape and reel packaging with
+Temperature conversion formula (result in °C): different sizes, see Table 17. The reels are sealed into
+S antistatic ESD bags. A drawing of the packaging tape with
+T = − 45 +175  T
+216 sensor orientation is shown in Figure 11.
+Quantity Packaging Reel Diameter Order Number
+S and S denote the raw sensor output (as decimal
+RH T
+2500 Tape & Reel 180 mm (7 inch) 3.000.047
+values) for humidity and temperature, respectively.
+10’000 Tape & Reel 330 mm (13 inch) 1-101681-01
+6 Quality Table 17 SHTC3 ordering options.
+6.1 Environmental Stability
+Qualification of the SHTC3 is performed based on the
+JEDEC JESD47 qualification test method.
+www.sensirion.com Version 4 – December 2022 9/14
+
+================================================================================
+PAGE 10
+================================================================================
+
+9 Technical Drawings
+9.1 Package Outline
+E A L T1xT2
+D 2 D e
+A3 E2 b
+* Mold opening shows smooth transition to package surface. Therefore
+this dimension is not well defined and given for reference only.
+Figure 9 Package outline drawing of the SHTC3.
+Parameter Symbol Min Nom. Max Units Comments
+Package height A 0.7 0.75 0.8 mm -
+Leadframe height A3 - 0.15 - mm -
+Pad width b 0.3 0.35 0.4 mm -
+Package width D 1.9 2 2.1 mm -
+Center pad length D2 1.5 1.6 1.7 mm -
+Package length E 1.9 2 2.1 mm -
+Center pad width E2 0.6 0.7 0.8 mm -
+Pad pitch e - 1 - mm -
+Pad length L 0.3 0.35 0.4 mm -
+S - - 1 mm Mold opening shows smooth transition to package
+Max cavity surface. Therefore this dimension is not well defined and
+given for reference only.
+Center pad marking T1xT2 - 0.2x45° - mm indicates the position of pin 1
+Table 18 Package outline dimensions and tolerances.
+www.sensirion.com Version 4 – December 2022 10/14
+
+================================================================================
+PAGE 11
+================================================================================
+
+9.2 Metal Land Pattern
+Figure 10 Recommended metal land pattern for SHTC3 (all dimensions are in mm). Recommended solder paste stencil thickness is 100 µm,
+pads on PCB are recommended to be non solder mask defined (NSMD).
+9.3 Tape and Reel Package
+Figure 11 Technical drawing of the packaging tape with sensor orientation in tape. Header tape is to the right and trailer tape to the left on
+this drawing. Dimensions are given in millimeters.
+www.sensirion.com Version 4 – December 2022 11/14
+
+================================================================================
+PAGE 12
+================================================================================
+
+10 Further Information
+For more in-depth information on the SHTC3 and its application please consult the following documents:
+Document Name Description Source
+Available for download at the Sensirion humidity
+Design guidelines for designing SHTxx humidity
+SHTxx Design Guide sensors download center:
+sensors into applications
+www.sensirion.com/humidity-download
+Available for download at the Sensirion humidity
+Guidelines for proper handling of SHTxx humidity
+SHTxx Handling Instructions sensors download center:
+sensors
+www.sensirion.com/humidity-download
+Available for download at the Sensirion humidity
+Sensirion Humidity Sensor
+Definition of sensor specifications. sensors download center:
+Specification Statement
+www.sensirion.com/humidity-download
+Table 19 Documents containing further information relevant for the SHTC3.
+www.sensirion.com Version 4 – December 2022 12/14
+
+================================================================================
+PAGE 13
+================================================================================
+
+Revision History
+Date Version Page(s) Changes
+July 2018 1 all Initial version
+January 2019 1.1 5 Added explicit specifications of normal and fast I2C mode.
+June 2019 2 1, 2 Added statement on NIST traceability
+January 2021 3 10 Added dimension tolerances, updated “Important Notices”.
+December 2022 4 12 Updated Table 19 due to obsolete document: Information covered now in handling
+instructions. Also changed reference in text to reference to the handling instruction.
+www.sensirion.com Version 4 – December 2022 13/14
+
+================================================================================
+PAGE 14
+================================================================================
+
+Important Notices
+Warning, Personal Injury
+Do not use this product as safety or emergency stop devices or in any other application where failure of the product could result
+in personal injury. Do not use this product for applications other than its intended and authorized use. Before installing,
+handling, using or servicing this product, please consult the data sheet and application notes. Failure to comply with these
+instructions could result in death or serious injury.
+If the Buyer shall purchase or use SENSIRION products for any unintended or unauthorized application, Buyer shall defend, indemnify and
+hold harmless SENSIRION and its officers, employees, subsidiaries, affiliates and distributors against all claims, costs, damages and
+expenses, and reasonable attorney fees arising out of, directly or indirectly, any claim of personal injury or death associated with such
+unintended or unauthorized use, even if SENSIRION shall be allegedly negligent with respect to the design or the manufacture of the
+product.
+ESD Precautions
+The inherent design of this component causes it to be sensitive to electrostatic discharge (ESD). To prevent ESD-induced damage and/or
+degradation, take customary and statutory ESD precautions when handling this product.
+See application note “ESD, Latchup and EMC” for more information.
+Warranty
+SENSIRION warrants solely to the original purchaser of this product for a period of 12 months (one year) from the date of delivery that this
+product shall be of the quality, material and workmanship defined in SENSIRION’s published specifications of the product. Within such
+period, if proven to be defective, SENSIRION shall repair and/or replace this product, in SENSIRION’s discretion, free of charge to the
+Buyer, provided that:
+• notice in writing describing the defects shall be given to SENSIRION within fourteen (14) days after their appearance;
+• such defects shall be found, to SENSIRION’s reasonable satisfaction, to have arisen from SENSIRION’s faulty design, material, or
+workmanship;
+• the defective product shall be returned to SENSIRION’s factory at the Buyer’s expense; and
+• the warranty period for any repaired or replaced product shall be limited to the unexpired portion of the original period.
+This warranty does not apply to any equipment which has not been installed and used within the specifications recommended by
+SENSIRION for the intended and proper use of the equipment. EXCEPT FOR THE WARRANTIES EXPRESSLY SET FORTH HEREIN,
+SENSIRION MAKES NO WARRANTIES, EITHER EXPRESS OR IMPLIED, WITH RESPECT TO THE PRODUCT. ANY AND ALL
+WARRANTIES, INCLUDING WITHOUT LIMITATION, WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+PURPOSE, ARE EXPRESSLY EXCLUDED AND DECLINED.
+SENSIRION is only liable for defects of this product arising under the conditions of operation provided for in the data sheet and proper use
+of the goods. SENSIRION explicitly disclaims all warranties, express or implied, for any period during which the goods are operated or
+stored not in accordance with the technical specifications.
+SENSIRION does not assume any liability arising out of any application or use of any product or circuit and specifically disclaims any and
+all liability, including without limitation consequential or incidental damages. All operating parameters, including without limitation
+recommended parameters, must be validated for each customer’s applications by customer’s technical experts. Recommended
+parameters can and do vary in different applications.
+SENSIRION reserves the right, without further notice, (i) to change the product specifications and/or the information in this document and
+(ii) to improve reliability, functions and design of this product.
+Copyright © 2021, by SENSIRION. CMOSens® is a trademark of Sensirion. All rights reserved
+Headquarters and Subsidiaries
+Sensirion AG Sensirion Inc., USA Sensirion Korea Co. Ltd.
+Laubisruetistr. 50 phone: +1 312 690 5858 phone: +82 31 337 7700~3
+CH-8712 Staefa ZH info-us@sensirion.com info-kr@sensirion.com
+Switzerland www.sensirion.com www.sensirion.com/kr
+phone: +41 44 306 40 00 Sensirion Japan Co. Ltd. Sensirion China Co. Ltd.
+fax: +41 44 306 40 30 phone: +81 3 3444 4940 phone: +86 755 8252 1501
+info@sensirion.com info-jp@sensirion.com info-cn@sensirion.com
+www.sensirion.com www.sensirion.com/jp www.sensirion.com/cn
+Sensirion Taiwan Co. Ltd
+phone: +886 3 5506701
+info@sensirion.com
+www.sensirion.com
+To find your local representative, please visit www.sensirion.com/distributors
+www.sensirion.com Version 4 – December 2022 14/14

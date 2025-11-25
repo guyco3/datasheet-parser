@@ -386,7 +386,48 @@ def extract_pins_from_tables(pdf_path: str, verbose: bool = False) -> Optional[D
         return None
 
     if verbose:
-        print(f"  Found {len(candidates)} pin candidates")
+        print(f"  Found {len(candidates)} pin candidates from tables")
+
+    # Fallback: Also check page text for pin definitions that might be outside tables
+    # Pattern: "4 VSS Ground" or similar
+    try:
+        with pdfplumber.open(pdf_path) as pdf:
+            pages_to_check = min(50, len(pdf.pages))
+            for page in pdf.pages[:pages_to_check]:
+                text = page.extract_text()
+                if not text:
+                    continue
+                
+                # Look for lines like "4 VSS Ground" or "Pin 4: VSS - Ground"
+                for line in text.split('\n'):
+                    # Pattern: number name description
+                    match = re.match(r'^(\d+)\s+([A-Z][A-Z0-9/_\-]{1,20})\s+(.+)', line.strip())
+                    if match:
+                        pin_num = int(match.group(1))
+                        name = match.group(2).strip()
+                        desc = match.group(3).strip()
+                        
+                        # Skip if we already have this pin from table
+                        if any(p[0] == pin_num for p in candidates):
+                            continue
+                        
+                        # Validate it looks like a pin (not random text)
+                        if len(name) >= config.MIN_PIN_NAME_LENGTH and len(name) <= config.MAX_PIN_NAME_LENGTH:
+                            details = {"description": desc} if desc else None
+                            pin_obj = Pin(
+                                number=pin_num,
+                                name=name,
+                                details=details
+                            )
+                            candidates.append((pin_num, pin_obj))
+                            if verbose:
+                                print(f"    Found pin {pin_num} ({name}) from text")
+    except Exception as e:
+        if verbose:
+            print(f"  Text fallback error: {e}")
+
+    if verbose and len(candidates) > 0:
+        print(f"  Total pin candidates (tables + text): {len(candidates)}")
 
     if not candidates:
         # Return metadata even if no pins found
